@@ -3,14 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cosmic Developer Portfolio</title>
+    <title>nexu | Cybersecurity Researcher</title>
     <style>
         :root {
             --neon-blue: #0ff0fc;
             --neon-purple: #bc13fe;
-            --cosmic-black: #0a0a12;
+            --hacker-green: #00ff41;
+            --cyber-black: #0a0a12;
             --stardust: rgba(255, 255, 255, 0.8);
-            --terminal-green: #00ff41;
+            --terminal-text: #c8c8c8;
         }
 
         @font-face {
@@ -19,8 +20,8 @@
         }
 
         body {
-            background-color: var(--cosmic-black);
-            color: var(--stardust);
+            background-color: var(--cyber-black);
+            color: var(--terminal-text);
             font-family: 'Fira Code', monospace;
             line-height: 1.6;
             margin: 0;
@@ -36,146 +37,184 @@
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 2rem;
-            position: relative;
+            padding: 0 2rem;
         }
 
-        /* Cosmic Header */
-        header {
-            text-align: center;
-            margin-bottom: 3rem;
-            position: relative;
-            padding: 2rem 0;
+        /* Navigation Bar */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 0;
             border-bottom: 1px solid rgba(188, 19, 254, 0.3);
+            position: sticky;
+            top: 0;
+            background-color: rgba(10, 10, 18, 0.9);
+            z-index: 100;
+            backdrop-filter: blur(5px);
         }
 
-        h1 {
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--terminal-text);
+            text-decoration: none;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--neon-blue);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--neon-purple);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 5rem 0;
+            min-height: 60vh;
+        }
+
+        .hero h1 {
             font-size: 3.5rem;
             margin: 0;
             background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple));
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            text-shadow: 0 0 10px rgba(188, 19, 254, 0.3);
-            letter-spacing: -2px;
+            margin-bottom: 1rem;
         }
 
-        h2 {
-            color: var(--neon-blue);
-            border-left: 3px solid var(--neon-purple);
-            padding-left: 1rem;
-            margin-top: 3rem;
-            font-size: 2rem;
+        .hero h2 {
+            font-size: 1.5rem;
+            color: var(--hacker-green);
+            margin-bottom: 2rem;
         }
 
-        h3 {
-            color: var(--neon-purple);
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
             margin-top: 2rem;
-        }
-
-        /* Terminal-like sections */
-        .terminal {
-            background: rgba(10, 10, 18, 0.7);
-            border: 1px solid rgba(188, 19, 254, 0.3);
-            border-radius: 8px;
-            padding: 1.5rem;
-            margin: 2rem 0;
-            position: relative;
-            box-shadow: 0 0 20px rgba(11, 2, 35, 0.8);
-            transition: all 0.3s ease;
-        }
-
-        .terminal:hover {
-            box-shadow: 0 0 30px rgba(188, 19, 254, 0.4);
-            border-color: rgba(188, 19, 254, 0.6);
-        }
-
-        .terminal::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 30px;
-            background: linear-gradient(90deg, rgba(188, 19, 254, 0.2), rgba(15, 240, 252, 0.2));
-            border-radius: 8px 8px 0 0;
-        }
-
-        .terminal-header {
-            position: absolute;
-            top: 8px;
-            left: 15px;
-            display: flex;
-        }
-
-        .terminal-btn {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            margin-right: 6px;
-        }
-
-        .btn-red { background: #ff5f56; }
-        .btn-yellow { background: #ffbd2e; }
-        .btn-green { background: #27c93f; }
-
-        /* Glowing links */
-        a {
-            color: var(--neon-blue);
-            text-decoration: none;
-            position: relative;
-            transition: all 0.3s ease;
-        }
-
-        a:hover {
-            color: var(--neon-purple);
-            text-shadow: 0 0 8px var(--neon-purple);
-        }
-
-        a::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 0;
-            width: 0;
-            height: 1px;
-            background: var(--neon-blue);
-            transition: width 0.3s ease;
-        }
-
-        a:hover::after {
-            width: 100%;
-        }
-
-        /* Tech stack bubbles */
-        .tech-stack {
-            display: flex;
             flex-wrap: wrap;
-            gap: 10px;
-            margin: 1.5rem 0;
+            justify-content: center;
         }
 
-        .tech-item {
+        .social-card {
             background: rgba(15, 240, 252, 0.1);
             border: 1px solid rgba(15, 240, 252, 0.3);
-            border-radius: 20px;
-            padding: 0.5rem 1rem;
-            font-size: 0.9rem;
+            border-radius: 8px;
+            padding: 1rem 1.5rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            color: var(--terminal-text);
+        }
+
+        .social-card:hover {
+            background: rgba(188, 19, 254, 0.2);
+            border-color: var(--neon-purple);
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(188, 19, 254, 0.2);
+        }
+
+        .social-card i {
+            font-size: 1.2rem;
+        }
+
+        /* About Section */
+        .about {
+            padding: 4rem 0;
+            border-top: 1px solid rgba(188, 19, 254, 0.3);
+            border-bottom: 1px solid rgba(188, 19, 254, 0.3);
+        }
+
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+        }
+
+        .about-text {
+            flex: 1;
+        }
+
+        .about h2 {
+            font-size: 2rem;
+            color: var(--neon-blue);
+            margin-bottom: 1.5rem;
+        }
+
+        .about p {
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple));
+            color: var(--cyber-black);
+            padding: 0.8rem 1.5rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 1rem;
             transition: all 0.3s ease;
         }
 
-        .tech-item:hover {
-            background: rgba(188, 19, 254, 0.2);
-            border-color: var(--neon-purple);
-            transform: translateY(-2px);
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(188, 19, 254, 0.4);
         }
 
-        /* Project cards */
+        /* Projects Section */
+        .projects {
+            padding: 4rem 0;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            color: var(--neon-blue);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
         .project-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
             gap: 2rem;
-            margin: 2rem 0;
         }
 
         .project-card {
@@ -204,275 +243,392 @@
             background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple));
         }
 
-        /* Footer with cosmic vibe */
-        footer {
-            text-align: center;
-            margin-top: 4rem;
-            padding: 2rem 0;
-            border-top: 1px solid rgba(188, 19, 254, 0.3);
-            position: relative;
+        .project-card h3 {
+            color: var(--hacker-green);
+            margin-top: 0;
         }
 
-        footer::before {
-            content: '✦';
-            position: absolute;
-            top: -12px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--cosmic-black);
-            padding: 0 1rem;
+        .project-card p {
+            margin-bottom: 1.5rem;
+        }
+
+        .project-link {
+            color: var(--neon-blue);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .project-link:hover {
             color: var(--neon-purple);
+            text-shadow: 0 0 8px rgba(188, 19, 254, 0.5);
+        }
+
+        /* Skills Section */
+        .skills {
+            padding: 4rem 0;
+            border-top: 1px solid rgba(188, 19, 254, 0.3);
+            border-bottom: 1px solid rgba(188, 19, 254, 0.3);
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-category {
+            background: rgba(10, 10, 18, 0.8);
+            border: 1px solid rgba(188, 19, 254, 0.2);
+            border-radius: 8px;
+            padding: 1.5rem;
+        }
+
+        .skill-category h3 {
+            color: var(--neon-purple);
+            margin-top: 0;
+            border-bottom: 1px solid rgba(188, 19, 254, 0.3);
+            padding-bottom: 0.5rem;
+        }
+
+        .skill-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .skill-list li {
+            padding: 0.5rem 0;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .skill-list li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: var(--hacker-green);
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 4rem 0;
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: rgba(10, 10, 18, 0.8);
+            border: 1px solid rgba(188, 19, 254, 0.2);
+            border-radius: 8px;
+            padding: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--neon-blue);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            background: rgba(15, 240, 252, 0.1);
+            border: 1px solid rgba(15, 240, 252, 0.3);
+            border-radius: 5px;
+            color: var(--terminal-text);
+            font-family: 'Fira Code', monospace;
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple));
+            color: var(--cyber-black);
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: 'Fira Code', monospace;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(188, 19, 254, 0.4);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem 0;
+            border-top: 1px solid rgba(188, 19, 254, 0.3);
+            margin-top: 2rem;
+        }
+
+        .footer-text {
+            margin-bottom: 1rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links a {
+            color: var(--terminal-text);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--neon-blue);
+        }
+
+        .copyright {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.5);
         }
 
         /* Animations */
-        @keyframes pulse {
-            0% { opacity: 0.6; }
-            50% { opacity: 1; }
-            100% { opacity: 0.6; }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
         }
 
-        .pulse {
-            animation: pulse 2s infinite;
+        .floating {
+            animation: float 3s ease-in-out infinite;
         }
 
         /* Responsive */
         @media (max-width: 768px) {
-            h1 {
+            .hero h1 {
                 font-size: 2.5rem;
+            }
+            
+            .about-content {
+                flex-direction: column;
             }
             
             .project-grid {
                 grid-template-columns: 1fr;
             }
+            
+            .nav-links {
+                gap: 1rem;
+            }
         }
 
-        /* Special terminal cursor effect */
-        .typewriter {
-            display: inline-block;
-            position: relative;
-        }
-
-        .typewriter::after {
-            content: '|';
-            position: absolute;
-            right: -8px;
-            color: var(--terminal-green);
-            animation: blink 1s step-end infinite;
-        }
-
-        @keyframes blink {
-            from, to { opacity: 1; }
-            50% { opacity: 0; }
+        @media (max-width: 480px) {
+            nav {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
         }
     </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>Welcome to My <span class="typewriter">Universe</span></h1>
-            <p><em>Where Code Meets Creativity</em></p>
-        </header>
+    <!-- Navigation Bar -->
+    <nav>
+        <a href="#" class="logo">nexu</a>
+        <div class="nav-links">
+            <a href="#about">About</a>
+            <a href="#projects">Projects</a>
+            <a href="#skills">Skills</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
 
-        <section>
-            <h2>🌌 Cosmic Introduction</h2>
-            <div class="terminal">
-                <div class="terminal-header">
-                    <div class="terminal-btn btn-red"></div>
-                    <div class="terminal-btn btn-yellow"></div>
-                    <div class="terminal-btn btn-green"></div>
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Raktim Baidya</h1>
+        <h2>Penetration Tester | CTF Player | Bug Bounty Hunter</h2>
+        
+        <div class="social-links">
+            <a href="https://hackerone.com/bugooos" class="social-card" target="_blank">
+                <i class="fas fa-bug"></i> HackerOne
+            </a>
+            <a href="https://github.com/bugooos" class="social-card" target="_blank">
+                <i class="fab fa-github"></i> GitHub
+            </a>
+            <a href="https://tryhackme.com/p/bugooos" class="social-card" target="_blank">
+                <i class="fas fa-terminal"></i> TryHackMe
+            </a>
+            <a href="https://www.youtube.com/@bugooos" class="social-card" target="_blank">
+                <i class="fab fa-youtube"></i> YouTube
+            </a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>Who am I?</h2>
+                    <p>My name is Raktim aka nexu, an Indian Cyber Security Enthusiast. Pursuing B.Sc. in Cybersecurity from Swami Vivekananda University Barrackpore.</p>
+                    <p>I do bug bounty hunting and I have a channel where I teach beginners about web security. Join me in my journey - let's learn and grow together!</p>
+                    <a href="https://www.linkedin.com/in/raktim-baidya-8736682a8/" class="cta-button" target="_blank">
+                        <i class="fab fa-linkedin"></i> Connect on LinkedIn
+                    </a>
                 </div>
-                <p><strong>Hello, traveler!</strong> I'm a <strong>developer, creator, and digital explorer</strong> sailing through the vast cosmos of technology. My journey is a fusion of <strong>logic and artistry</strong>, where every line of code tells a story and every pixel has a purpose.</p>
-                <p>🚀 <em>Mission</em>: Build immersive digital experiences that defy expectations.</p>
-                <p>✨ <em>Mantra</em>: <strong>"Debugging the universe, one commit at a time."</strong></p>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section>
-            <h2>🛠️ Tech Stack & Superpowers</h2>
-            <div class="terminal">
-                <h3>Languages & Frameworks</h3>
-                <div class="tech-stack">
-                    <span class="tech-item">React</span>
-                    <span class="tech-item">Next.js</span>
-                    <span class="tech-item">Three.js</span>
-                    <span class="tech-item">Node.js</span>
-                    <span class="tech-item">Python</span>
-                    <span class="tech-item">GraphQL</span>
-                    <span class="tech-item">PostgreSQL</span>
-                    <span class="tech-item">MongoDB</span>
-                    <span class="tech-item">Firebase</span>
-                    <span class="tech-item">React Native</span>
-                </div>
-
-                <h3>Creative Tools</h3>
-                <div class="tech-stack">
-                    <span class="tech-item">Figma</span>
-                    <span class="tech-item">Blender</span>
-                    <span class="tech-item">After Effects</span>
-                    <span class="tech-item">Solidity</span>
-                    <span class="tech-item">Ethereum</span>
-                </div>
-
-                <p>🔮 <em>Currently experimenting with</em>: <strong>AI/ML (TensorFlow, GPT models)</strong></p>
-            </div>
-        </section>
-
-        <section>
-            <h2>🚀 Projects That Defy Gravity</h2>
+    <!-- Projects Section -->
+    <section id="projects" class="projects">
+        <div class="container">
+            <h2 class="section-title">My Projects</h2>
             <div class="project-grid">
                 <div class="project-card">
-                    <h3>1. Nebula OS</h3>
-                    <p>A spatial, gesture-controlled OS built with Electron & WebGL.</p>
-                    <p><strong>Tech</strong>: React, Rust, WebAssembly</p>
-                    <p><a href="https://github.com/yourusername/nebula-os" target="_blank">Launch Project →</a></p>
+                    <h3>Nedit</h3>
+                    <p>Nedit is a python based advanced nested text editor that has many cool features like sort, search, filter for both positive and negative matches.</p>
+                    <a href="https://github.com/bugooos/Nedit" class="project-link" target="_blank">
+                        <i class="fab fa-github"></i> View Project
+                    </a>
                 </div>
-
                 <div class="project-card">
-                    <h3>2. Quantum Canvas</h3>
-                    <p>Generate infinite art with neural style transfer.</p>
-                    <p><strong>Tech</strong>: Python, TensorFlow, Next.js</p>
-                    <p><a href="https://quantum-canvas.vercel.app" target="_blank">Live Demo →</a></p>
-                </div>
-
-                <div class="project-card">
-                    <h3>3. DevWarp</h3>
-                    <p>Code together in a virtual world with real-time collaboration.</p>
-                    <p><strong>Tech</strong>: WebRTC, Three.js, Firebase</p>
-                    <p><a href="https://devwarp.xyz" target="_blank">Explore DevWarp →</a></p>
+                    <h3>nCIDR</h3>
+                    <p>nCIDR is a powerful python tool designed for handling CIDR ranges and extracting IP addresses. It allows users to process CIDR ranges to generate a list of IP addresses and check for active IPs.</p>
+                    <a href="https://github.com/bugooos/ncidr" class="project-link" target="_blank">
+                        <i class="fab fa-github"></i> View Project
+                    </a>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section>
-            <h2>📡 Connect With Me Across the Multiverse</h2>
-            <div class="terminal">
-                <ul>
-                    <li><strong>GitHub</strong>: <a href="https://github.com/yourusername" target="_blank">@yourusername</a> <em>(Where the magic happens)</em></li>
-                    <li><strong>Twitter</strong>: <a href="https://twitter.com/yourhandle" target="_blank">@yourhandle</a> <em>(Thoughts, memes, and tech rants)</em></li>
-                    <li><strong>LinkedIn</strong>: <a href="https://linkedin.com/in/yourprofile" target="_blank">Your Name</a> <em>(Professional warp zone)</em></li>
-                    <li><strong>Personal Site</strong>: <a href="https://yourname.dev" target="_blank">yourname.dev</a> <em>(Portal to my universe)</em></li>
-                </ul>
-                <p>💌 <em>For secret transmissions</em>: <strong>yourname@protonmail.com</strong></p>
+    <!-- Skills Section -->
+    <section id="skills" class="skills">
+        <div class="container">
+            <h2 class="section-title">My Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3>Cybersecurity</h3>
+                    <ul class="skill-list">
+                        <li>Network Security</li>
+                        <li>Web Security</li>
+                        <li>Ethical Hacking</li>
+                        <li>Penetration Testing</li>
+                        <li>Privilege Escalation</li>
+                        <li>OWASP-TOP-10</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3>Tools</h3>
+                    <ul class="skill-list">
+                        <li>Linux</li>
+                        <li>Nmap</li>
+                        <li>Nikto</li>
+                        <li>SQLMap</li>
+                        <li>Burpsuite</li>
+                        <li>Metasploit</li>
+                        <li>Nessus</li>
+                        <li>John-The-Ripper</li>
+                        <li>HashCat</li>
+                        <li>nedit</li>
+                        <li>Shodan</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3>Others</h3>
+                    <ul class="skill-list">
+                        <li>YouTube Content Creation</li>
+                        <li>Gaming</li>
+                        <li>Technical Writing</li>
+                        <li>CTF Challenges</li>
+                    </ul>
+                </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section>
-            <h2>🎧 Developer's Soundtrack</h2>
-            <div class="terminal">
-                <p><em>What fuels my coding sessions?</em></p>
-                <ul>
-                    <li><strong>Synthwave / Cyberpunk Mixes</strong> <em>(For late-night debugging)</em></li>
-                    <li><strong>Hans Zimmer Soundtracks</strong> <em>(When I need to feel like a coding superhero)</em></li>
-                    <li><strong>Lofi Hip-Hop</strong> <em>(For those smooth, bug-free flows)</em></li>
-                </ul>
-                <p>🎶 <em>Currently playing</em>: <strong>"Code:breaker" by Neon Dreams</strong></p>
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Get In Touch</h2>
+            <div class="contact-form">
+                <form>
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">
+                        <i class="fas fa-paper-plane"></i> Send Message
+                    </button>
+                </form>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <footer>
-            <div class="terminal">
-                <blockquote>"The best way to predict the future is to invent it." <cite>– Alan Kay</cite></blockquote>
-                <p>I'm always open to <strong>collaborations, wild ideas, and interstellar tech discussions</strong>. Let's <strong>build the impossible</strong> together.</p>
-                <p class="pulse"><strong>Until our paths cross again...</strong><br>
-                <em>Keep coding, stay stellar.</em> ✨</p>
-                <p>🛸 <em>This page was last updated from a distant galaxy at: <strong>May 23, 2025</strong></em></p>
-                <p><a href="#">🚪 Exit Portal</a> <em>(Click to warp back to reality)</em></p>
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p class="footer-text">"The best way to predict the future is to invent it." - Alan Kay</p>
+            <div class="footer-links">
+                <a href="https://hackerone.com/bugooos" target="_blank"><i class="fas fa-bug"></i></a>
+                <a href="https://github.com/bugooos" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="https://tryhackme.com/p/bugooos" target="_blank"><i class="fas fa-terminal"></i></a>
+                <a href="https://www.youtube.com/@bugooos" target="_blank"><i class="fab fa-youtube"></i></a>
+                <a href="https://www.linkedin.com/in/raktim-baidya-8736682a8/" target="_blank"><i class="fab fa-linkedin"></i></a>
             </div>
-        </footer>
-    </div>
+            <p class="copyright">© 2024 nexu | All Rights Reserved</p>
+        </div>
+    </footer>
 
     <script>
-        // Typewriter effect
-        const typewriterTexts = ["Universe", "Cosmos", "Code", "Reality"];
-        let currentIndex = 0;
-        const typewriterElement = document.querySelector('.typewriter');
-
-        function typeWriterEffect() {
-            let text = typewriterTexts[currentIndex];
-            let i = 0;
-            typewriterElement.textContent = '';
-            
-            function typing() {
-                if (i < text.length) {
-                    typewriterElement.textContent += text.charAt(i);
-                    i++;
-                    setTimeout(typing, 100);
-                } else {
-                    setTimeout(erasing, 2000);
-                }
-            }
-            
-            function erasing() {
-                if (typewriterElement.textContent.length > 0) {
-                    typewriterElement.textContent = typewriterElement.textContent.substring(0, typewriterElement.textContent.length - 1);
-                    setTimeout(erasing, 50);
-                } else {
-                    currentIndex = (currentIndex + 1) % typewriterTexts.length;
-                    setTimeout(typeWriterEffect, 500);
-                }
-            }
-            
-            typing();
-        }
-
-        // Start the typewriter effect
-        setTimeout(typeWriterEffect, 1000);
-
-        // Terminal hover effect
-        const terminals = document.querySelectorAll('.terminal');
-        terminals.forEach(terminal => {
-            terminal.addEventListener('mousemove', (e) => {
-                const rect = terminal.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                
-                terminal.style.setProperty('--mouse-x', x);
-                terminal.style.setProperty('--mouse-y', y);
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
             });
         });
 
-        // Add cosmic particles (optional)
-        document.addEventListener('DOMContentLoaded', () => {
-            const container = document.querySelector('.container');
-            for (let i = 0; i < 30; i++) {
-                const particle = document.createElement('div');
-                particle.style.position = 'absolute';
-                particle.style.width = Math.random() * 3 + 'px';
-                particle.style.height = particle.style.width;
-                particle.style.backgroundColor = 'white';
-                particle.style.borderRadius = '50%';
-                particle.style.opacity = Math.random() * 0.5 + 0.1;
-                particle.style.top = Math.random() * 100 + '%';
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.pointerEvents = 'none';
-                container.appendChild(particle);
-                
-                // Animate particles
-                animateParticle(particle);
-            }
+        // Form submission handling
+        const form = document.querySelector('form');
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Thank you for your message! I will get back to you soon.');
+            form.reset();
         });
 
-        function animateParticle(particle) {
-            let x = parseFloat(particle.style.left);
-            let y = parseFloat(particle.style.top);
-            let xSpeed = (Math.random() - 0.5) * 0.1;
-            let ySpeed = (Math.random() - 0.5) * 0.1;
-            
-            function move() {
-                x += xSpeed;
-                y += ySpeed;
-                
-                if (x < 0 || x > 100) xSpeed *= -1;
-                if (y < 0 || y > 100) ySpeed *= -1;
-                
-                particle.style.left = x + '%';
-                particle.style.top = y + '%';
-                
-                requestAnimationFrame(move);
-            }
-            
-            move();
-        }
+        // Add floating animation to social cards
+        const socialCards = document.querySelectorAll('.social-card');
+        socialCards.forEach((card, index) => {
+            card.style.animationDelay = `${index * 0.1}s`;
+            card.classList.add('floating');
+        });
     </script>
 </body>
 </html>
