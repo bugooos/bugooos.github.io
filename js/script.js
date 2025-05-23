@@ -75,3 +75,35 @@ window.addEventListener('scroll', () => {
         }
     });
 });
+
+// Typing animation with JavaScript
+const nameElement = document.querySelector('h1');
+const nameText = "Raktim Baidya";
+let i = 0;
+
+function typeWriter() {
+    if (i < nameText.length) {
+        nameElement.innerHTML += nameText.charAt(i);
+        i++;
+        setTimeout(typeWriter, 150); // Adjust speed here (lower = faster)
+    } else {
+        // Add blinking cursor after animation completes
+        nameElement.innerHTML += '<span class="blinking-cursor">|</span>';
+    }
+}
+
+// Start the animation when page loads
+window.addEventListener('DOMContentLoaded', () => {
+    nameElement.innerHTML = ''; // Clear existing text
+    typeWriter();
+});
+
+// Add this to your CSS if using JS version:
+.blinking-cursor {
+    animation: blink 1s step-end infinite;
+    color: var(--neon-blue);
+}
+@keyframes blink {
+    from, to { opacity: 1 }
+    50% { opacity: 0 }
+}
