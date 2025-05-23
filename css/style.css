@@ -436,3 +436,20 @@ footer {
         justify-content: center;
     }
 }
+
+.alternative-contact {
+    text-align: center;
+    margin-top: 2rem;
+    color: var(--neon-blue);
+}
+
+.alternative-contact a {
+    color: var(--hacker-green);
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.alternative-contact a:hover {
+    text-decoration: underline;
+    text-shadow: 0 0 8px rgba(0, 255, 65, 0.5);
+}

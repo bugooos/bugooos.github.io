@@ -10,23 +10,40 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
 // Form submission handling
 const contactForm = document.getElementById('contactForm');
-if (contactForm) {
-    contactForm.addEventListener('submit', (e) => {
-        e.preventDefault();
+// Contact form handling
+document.getElementById('contactForm')?.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const form = e.target;
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const originalBtnText = submitBtn.innerHTML;
+    
+    try {
+        // Show loading state
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+        submitBtn.disabled = true;
         
-        // Get form values
-        const name = document.getElementById('name').value;
-        const email = document.getElementById('email').value;
-        const message = document.getElementById('message').value;
+        const response = await fetch(form.action, {
+            method: 'POST',
+            body: new FormData(form),
+            headers: {
+                'Accept': 'application/json'
+            }
+        });
         
-        // Here you would typically send the data to a server
-        // For now, we'll just show an alert
-        alert(`Thank you, ${name}! Your message has been sent. I'll get back to you soon at ${email}.`);
-        
-        // Reset the form
-        contactForm.reset();
-    });
-}
+        if (response.ok) {
+            // Redirect to thank you page (defined in _next hidden input)
+            window.location.href = form.querySelector('input[name="_next"]').value;
+        } else {
+            throw new Error('Form submission failed');
+        }
+    } catch (error) {
+        alert('Oops! Something went wrong. Please email me directly at knightfrig@gmail.com');
+        console.error('Form submission error:', error);
+    } finally {
+        submitBtn.innerHTML = originalBtnText;
+        submitBtn.disabled = false;
+    }
+});
 
 // Add floating animation to social cards
 const socialCards = document.querySelectorAll('.social-card');
