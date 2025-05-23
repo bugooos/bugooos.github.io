@@ -1,109 +1,131 @@
-// Smooth scrolling for navigation links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        document.querySelector(this.getAttribute('href')).scrollIntoView({
-            behavior: 'smooth'
+// Wait for DOM to be fully loaded
+document.addEventListener('DOMContentLoaded', function() {
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+            
+            if (targetElement) {
+                targetElement.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+                
+                // Update URL without page jump
+                if (history.pushState) {
+                    history.pushState(null, null, targetId);
+                } else {
+                    location.hash = targetId;
+                }
+            }
         });
     });
-});
 
-// Form submission handling
-const contactForm = document.getElementById('contactForm');
-// Contact form handling
-document.getElementById('contactForm')?.addEventListener('submit', async function(e) {
-    e.preventDefault();
-    const form = e.target;
-    const submitBtn = form.querySelector('button[type="submit"]');
-    const originalBtnText = submitBtn.innerHTML;
+    // Contact form handling
+    const contactForm = document.getElementById('contactForm');
+    if (contactForm) {
+        contactForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const form = e.target;
+            const submitBtn = form.querySelector('button[type="submit"]');
+            const originalBtnText = submitBtn.innerHTML;
+            
+            try {
+                // Show loading state
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+                submitBtn.disabled = true;
+                
+                const response = await fetch(form.action, {
+                    method: 'POST',
+                    body: new FormData(form),
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+                
+                if (response.ok) {
+                    const nextPage = form.querySelector('input[name="_next"]')?.value;
+                    if (nextPage) {
+                        window.location.href = nextPage;
+                    } else {
+                        alert('Message sent successfully!');
+                        form.reset();
+                    }
+                } else {
+                    throw new Error('Form submission failed');
+                }
+            } catch (error) {
+                console.error('Form submission error:', error);
+                alert('Oops! Something went wrong. Please email me directly at knightfrig@gmail.com');
+            } finally {
+                submitBtn.innerHTML = originalBtnText;
+                submitBtn.disabled = false;
+            }
+        });
+    }
+
+    // Add floating animation to social cards
+    const socialCards = document.querySelectorAll('.social-card');
+    socialCards.forEach((card, index) => {
+        card.style.animationDelay = `${index * 0.1}s`;
+        card.classList.add('floating');
+    });
+
+    // Active section detection for navigation
+    const sections = document.querySelectorAll('section');
+    const navLinks = document.querySelectorAll('.nav-links a');
     
-    try {
-        // Show loading state
-        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
-        submitBtn.disabled = true;
+    function updateActiveSection() {
+        let current = '';
+        const scrollPosition = window.scrollY + 200;
         
-        const response = await fetch(form.action, {
-            method: 'POST',
-            body: new FormData(form),
-            headers: {
-                'Accept': 'application/json'
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.clientHeight;
+            
+            if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                current = section.getAttribute('id');
             }
         });
         
-        if (response.ok) {
-            // Redirect to thank you page (defined in _next hidden input)
-            window.location.href = form.querySelector('input[name="_next"]').value;
-        } else {
-            throw new Error('Form submission failed');
-        }
-    } catch (error) {
-        alert('Oops! Something went wrong. Please email me directly at knightfrig@gmail.com');
-        console.error('Form submission error:', error);
-    } finally {
-        submitBtn.innerHTML = originalBtnText;
-        submitBtn.disabled = false;
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === `#${current}`) {
+                link.classList.add('active');
+            }
+        });
     }
-});
-
-// Add floating animation to social cards
-const socialCards = document.querySelectorAll('.social-card');
-socialCards.forEach((card, index) => {
-    card.style.animationDelay = `${index * 0.1}s`;
-    card.classList.add('floating');
-});
-
-// Add active class to current section in navigation
-const sections = document.querySelectorAll('section');
-const navLinks = document.querySelectorAll('.nav-links a');
-
-window.addEventListener('scroll', () => {
-    let current = '';
     
-    sections.forEach(section => {
-        const sectionTop = section.offsetTop;
-        const sectionHeight = section.clientHeight;
+    // Run on scroll and initial load
+    window.addEventListener('scroll', updateActiveSection);
+    updateActiveSection();
+
+    // Typing animation for the name
+    const nameElement = document.querySelector('h1');
+    if (nameElement) {
+        const nameText = "Raktim Baidya";
+        let i = 0;
         
-        if (pageYOffset >= (sectionTop - 300)) {
-            current = section.getAttribute('id');
+        // Clear existing text
+        nameElement.textContent = '';
+        
+        function typeWriter() {
+            if (i < nameText.length) {
+                nameElement.textContent += nameText.charAt(i);
+                i++;
+                setTimeout(typeWriter, 100); // Typing speed (ms per character)
+            } else {
+                // Add blinking cursor after animation completes
+                const cursor = document.createElement('span');
+                cursor.className = 'blinking-cursor';
+                cursor.textContent = '|';
+                nameElement.appendChild(cursor);
+            }
         }
-    });
-    
-    navLinks.forEach(link => {
-        link.classList.remove('active');
-        if (link.getAttribute('href') === `#${current}`) {
-            link.classList.add('active');
-        }
-    });
-});
-
-// Typing animation with JavaScript
-const nameElement = document.querySelector('h1');
-const nameText = "Raktim Baidya";
-let i = 0;
-
-function typeWriter() {
-    if (i < nameText.length) {
-        nameElement.innerHTML += nameText.charAt(i);
-        i++;
-        setTimeout(typeWriter, 150); // Adjust speed here (lower = faster)
-    } else {
-        // Add blinking cursor after animation completes
-        nameElement.innerHTML += '<span class="blinking-cursor">|</span>';
+        
+        // Start the animation after a slight delay
+        setTimeout(typeWriter, 500);
     }
-}
-
-// Start the animation when page loads
-window.addEventListener('DOMContentLoaded', () => {
-    nameElement.innerHTML = ''; // Clear existing text
-    typeWriter();
 });
-
-// Add this to your CSS if using JS version:
-.blinking-cursor {
-    animation: blink 1s step-end infinite;
-    color: var(--neon-blue);
-}
-@keyframes blink {
-    from, to { opacity: 1 }
-    50% { opacity: 0 }
-}
