@@ -110,6 +110,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Clear existing text
         nameElement.textContent = '';
+        nameElement.style.opacity = '1';
         
         function typeWriter() {
             if (i < nameText.length) {
@@ -117,11 +118,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 i++;
                 setTimeout(typeWriter, 100); // Typing speed (ms per character)
             } else {
-                // Add blinking cursor after animation completes
-                const cursor = document.createElement('span');
-                cursor.className = 'blinking-cursor';
-                cursor.textContent = '|';
-                nameElement.appendChild(cursor);
+                nameElement.classList.add('glitch-effect');
+                setTimeout(() => {
+                nameElement.style.transition = 'opacity 0.5s ease-out';
+                 nameElement.style.opacity = '0';
+                }, 800);
             }
         }
         
