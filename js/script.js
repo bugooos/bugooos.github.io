@@ -117,13 +117,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 nameElement.textContent += nameText.charAt(i);
                 i++;
                 setTimeout(typeWriter, 100); // Typing speed (ms per character)
-            } else {
-                nameElement.classList.add('glitch-effect');
-                setTimeout(() => {
-                nameElement.style.transition = 'opacity 0.5s ease-out';
-                 nameElement.style.opacity = '0';
-                }, 800);
-            }
+            } 
         }
         
         // Start the animation after a slight delay

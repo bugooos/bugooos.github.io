@@ -495,3 +495,9 @@ footer {
     animation: glitch 0.5s linear infinite;
     text-shadow: 2px 0 var(--neon-blue), -2px 0 var(--neon-purple);
 }
+
+/* terminal look */
+h1 {
+    border-right: none; /* Removes cursor-like border (if any) */
+    font-family: 'Fira Code', monospace; /* Ensures code font */
+}
