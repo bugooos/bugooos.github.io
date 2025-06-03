@@ -102,66 +102,25 @@ document.addEventListener('DOMContentLoaded', function() {
     window.addEventListener('scroll', updateActiveSection);
     updateActiveSection();
 
-    <script>
-
-
-    // Modified typing animation with backspacing effect
-    document.addEventListener('DOMContentLoaded', function() {
-    const nameElement = document.querySelector('.hero h1');
+    // Typing animation for the name
+    const nameElement = document.querySelector('h1');
     if (nameElement) {
-        const phrases = [
-            {text: "Raktim Baidya", hold: 2000},
-            {text: "nexu", hold: 2000},
-            {text: "bugooos", hold: 2000}
-        ];
+        const nameText = "Raktim Baidya";
+        let i = 0;
         
-        let currentPhraseIndex = 0;
-        let isTyping = true;
-        let currentText = '';
-        let charIndex = 0;
-        let holdTimeout;
-
-        // Clear existing text and make visible
+        // Clear existing text
         nameElement.textContent = '';
         nameElement.style.opacity = '1';
-
-        function animate() {
-            clearTimeout(holdTimeout);
-            
-            const currentPhrase = phrases[currentPhraseIndex].text;
-            const holdDuration = phrases[currentPhraseIndex].hold;
-
-            if (isTyping) {
-                // Typing forward
-                if (charIndex < currentPhrase.length) {
-                    currentText = currentPhrase.substring(0, charIndex + 1);
-                    nameElement.textContent = currentText;
-                    charIndex++;
-                    setTimeout(animate, 100); // Typing speed
-                } else {
-                    // Finished typing, hold for 2 seconds
-                    isTyping = false;
-                    holdTimeout = setTimeout(animate, holdDuration);
-                }
-            } else {
-                // Backspacing
-                if (currentText.length > 0) {
-                    currentText = currentText.substring(0, currentText.length - 1);
-                    nameElement.textContent = currentText;
-                    setTimeout(animate, 50); // Backspacing speed
-                } else {
-                    // Move to next phrase or loop
-                    isTyping = true;
-                    charIndex = 0;
-                    currentPhraseIndex = (currentPhraseIndex + 1) % phrases.length;
-                    setTimeout(animate, 300); // Delay before next phrase
-                }
-            }
+        
+        function typeWriter() {
+            if (i < nameText.length) {
+                nameElement.textContent += nameText.charAt(i);
+                i++;
+                setTimeout(typeWriter, 100); // Typing speed (ms per character)
+            } 
         }
-
-        // Start animation after slight delay
-        setTimeout(animate, 500);
-     }
-});
-</script>
+        
+        // Start the animation after a slight delay
+        setTimeout(typeWriter, 500);
+    }
 });
