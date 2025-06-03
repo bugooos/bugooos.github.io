@@ -502,8 +502,7 @@ h1 {
     font-family: 'Fira Code', monospace; /* Ensures code font */
 }
 
-/* Certification and badges part */
-
+/* Combined Credentials(certification) Section */
 .combined-credentials {
     padding: 4rem 0;
     border-top: 1px solid rgba(188, 19, 254, 0.3);
@@ -517,6 +516,35 @@ h1 {
 
 .certifications-section, .badges-section {
     flex: 1;
+    background: rgba(10, 10, 18, 0.8);
+    border: 1px solid rgba(188, 19, 254, 0.2);
+    border-radius: 8px;
+    padding: 1.5rem;
+}
+
+.certifications-section h3, .badges-section h3 {
+    color: var(--neon-purple);
+    margin-top: 0;
+    border-bottom: 1px solid rgba(188, 19, 254, 0.3);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.certification-item, .badge-item {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px dashed rgba(188, 19, 254, 0.1);
+}
+
+.certification-item:last-child, .badge-item:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.certification-item h4, .badge-item h4 {
+    color: var(--hacker-green);
+    margin: 0 0 0.5rem 0;
 }
 
 .divider {
