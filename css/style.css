@@ -501,3 +501,26 @@ h1 {
     border-right: none; /* Removes cursor-like border (if any) */
     font-family: 'Fira Code', monospace; /* Ensures code font */
 }
+
+/* Certification and badges part */
+
+.combined-credentials {
+    padding: 4rem 0;
+    border-top: 1px solid rgba(188, 19, 254, 0.3);
+    border-bottom: 1px solid rgba(188, 19, 254, 0.3);
+}
+
+.credentials-wrapper {
+    display: flex;
+    gap: 2rem;
+}
+
+.certifications-section, .badges-section {
+    flex: 1;
+}
+
+.divider {
+    width: 1px;
+    background-color: rgba(188, 19, 254, 0.3);
+    margin: 0 1rem;
+}
