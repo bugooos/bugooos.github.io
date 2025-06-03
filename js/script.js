@@ -107,61 +107,61 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Modified typing animation with backspacing effect
     document.addEventListener('DOMContentLoaded', function() {
-        const nameElement = document.querySelector('.hero h1');
-        if (nameElement) {
-            const phrases = [
-                {text: "Raktim Baidya", hold: 2000},
-                {text: "nexu", hold: 2000},
-                {text: "bugooos", hold: 2000}
-            ];
+    const nameElement = document.querySelector('.hero h1');
+    if (nameElement) {
+        const phrases = [
+            {text: "Raktim Baidya", hold: 2000},
+            {text: "nexu", hold: 2000},
+            {text: "bugooos", hold: 2000}
+        ];
+        
+        let currentPhraseIndex = 0;
+        let isTyping = true;
+        let currentText = '';
+        let charIndex = 0;
+        let holdTimeout;
+
+        // Clear existing text and make visible
+        nameElement.textContent = '';
+        nameElement.style.opacity = '1';
+
+        function animate() {
+            clearTimeout(holdTimeout);
             
-            let currentPhraseIndex = 0;
-            let isTyping = true;
-            let currentText = '';
-            let charIndex = 0;
-            let holdTimeout;
+            const currentPhrase = phrases[currentPhraseIndex].text;
+            const holdDuration = phrases[currentPhraseIndex].hold;
 
-            // Clear existing text and make visible
-            nameElement.textContent = '';
-            nameElement.style.opacity = '1';
-
-            function animate() {
-                clearTimeout(holdTimeout);
-                
-                const currentPhrase = phrases[currentPhraseIndex].text;
-                const holdDuration = phrases[currentPhraseIndex].hold;
-
-                if (isTyping) {
-                    // Typing forward
-                    if (charIndex < currentPhrase.length) {
-                        currentText = currentPhrase.substring(0, charIndex + 1);
-                        nameElement.textContent = currentText;
-                        charIndex++;
-                        setTimeout(animate, 100); // Typing speed
-                    } else {
-                        // Finished typing, hold for 2 seconds
-                        isTyping = false;
-                        holdTimeout = setTimeout(animate, holdDuration);
-                    }
+            if (isTyping) {
+                // Typing forward
+                if (charIndex < currentPhrase.length) {
+                    currentText = currentPhrase.substring(0, charIndex + 1);
+                    nameElement.textContent = currentText;
+                    charIndex++;
+                    setTimeout(animate, 100); // Typing speed
                 } else {
-                    // Backspacing
-                    if (currentText.length > 0) {
-                        currentText = currentText.substring(0, currentText.length - 1);
-                        nameElement.textContent = currentText;
-                        setTimeout(animate, 50); // Backspacing speed
-                    } else {
-                        // Move to next phrase or loop
-                        isTyping = true;
-                        charIndex = 0;
-                        currentPhraseIndex = (currentPhraseIndex + 1) % phrases.length;
-                        setTimeout(animate, 300); // Delay before next phrase
-                    }
+                    // Finished typing, hold for 2 seconds
+                    isTyping = false;
+                    holdTimeout = setTimeout(animate, holdDuration);
+                }
+            } else {
+                // Backspacing
+                if (currentText.length > 0) {
+                    currentText = currentText.substring(0, currentText.length - 1);
+                    nameElement.textContent = currentText;
+                    setTimeout(animate, 50); // Backspacing speed
+                } else {
+                    // Move to next phrase or loop
+                    isTyping = true;
+                    charIndex = 0;
+                    currentPhraseIndex = (currentPhraseIndex + 1) % phrases.length;
+                    setTimeout(animate, 300); // Delay before next phrase
                 }
             }
-
-            // Start animation after slight delay
-            setTimeout(animate, 500);
         }
-    });
+
+        // Start animation after slight delay
+        setTimeout(animate, 500);
+     }
+});
 </script>
 });
