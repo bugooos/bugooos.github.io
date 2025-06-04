@@ -547,6 +547,65 @@ h1 {
     margin: 0 0 0.5rem 0;
 }
 
+.certificates-slider, .badges-slider {
+  display: flex;
+  gap: 20px;
+  position: relative;
+  height: 300px; /* Adjust based on your content */
+}
+
+.certificate, .badge {
+  width: 30%;
+  transition: all 0.5s ease;
+  opacity: 0;
+  position: absolute;
+}
+
+.certificate.active, .badge.active {
+  opacity: 1;
+  transform: translateX(0);
+  left: 0;
+}
+
+.certificate.next, .badge.next {
+  opacity: 0.7;
+  transform: translateX(100%);
+  left: 35%;
+}
+
+.certificate.prev, .badge.prev {
+  opacity: 0.7;
+  transform: translateX(-100%);
+  left: -35%;
+}
+
+/* Animation classes */
+.slide-out {
+  animation: slideOut 0.5s forwards;
+}
+
+.slide-in {
+  animation: slideIn 0.5s forwards;
+}
+
+@keyframes slideOut {
+  to {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
 .divider {
     width: 1px;
     background-color: rgba(188, 19, 254, 0.3);

@@ -123,4 +123,88 @@ document.addEventListener('DOMContentLoaded', function() {
         // Start the animation after a slight delay
         setTimeout(typeWriter, 500);
     }
+
+    class RotatingDisplay {
+  constructor(containerSelector, itemSelector, items) {
+    this.container = document.querySelector(containerSelector);
+    this.items = document.querySelectorAll(itemSelector);
+    this.allItems = items; // Array of all your certificates/badges data
+    this.currentIndex = 0;
+    this.interval = null;
+    this.animationDuration = 500; // ms
+    
+    // Initialize display
+    this.updateDisplay();
+    
+    // Start rotation
+    this.startRotation(3000); // Rotate every 3 seconds
+  }
+  
+  updateDisplay() {
+    // Clear all classes first
+    this.items.forEach(item => {
+      item.className = itemSelector.replace('.', ''); // Reset to base class
+    });
+    
+    // Calculate indices for current, next, and previous items
+    const prevIndex = (this.currentIndex - 1 + this.allItems.length) % this.allItems.length;
+    const nextIndex = (this.currentIndex + 1) % this.allItems.length;
+    
+    // Update DOM elements with data
+    this.updateItem(this.items[0], this.allItems[this.currentIndex], 'active');
+    this.updateItem(this.items[1], this.allItems[nextIndex], 'next');
+    this.updateItem(this.items[2], this.allItems[prevIndex], 'prev');
+  }
+  
+  updateItem(element, data, className) {
+    element.classList.add(className);
+    // Update element content with your data
+    element.innerHTML = `
+      <img src="${data.image}" alt="${data.title}">
+      <h3>${data.title}</h3>
+      <p>${data.description}</p>
+    `;
+  }
+  
+  rotate() {
+    // Animate current item out
+    this.items[0].classList.add('slide-out');
+    
+    setTimeout(() => {
+      this.currentIndex = (this.currentIndex + 1) % this.allItems.length;
+      this.updateDisplay();
+      
+      // Animate new item in
+      this.items[0].classList.add('slide-in');
+      
+      setTimeout(() => {
+        this.items[0].classList.remove('slide-in');
+      }, this.animationDuration);
+    }, this.animationDuration);
+  }
+  
+  startRotation(interval) {
+    this.interval = setInterval(() => this.rotate(), interval);
+  }
+  
+  stopRotation() {
+    clearInterval(this.interval);
+  }
+}
+
+// Your data arrays
+const certificatesData = [
+  { image: 'cert1.jpg', title: 'Certificate 1', description: 'Description 1' },
+  // Add all your certificates
+];
+
+const badgesData = [
+  { image: 'badge1.png', title: 'Badge 1', description: 'Description 1' },
+  // Add all your badges
+];
+
+// Initialize displays
+const certificatesDisplay = new RotatingDisplay('.certificates-slider', '.certificate', certificatesData);
+const badgesDisplay = new RotatingDisplay('.badges-slider', '.badge', badgesData);
+
 });
