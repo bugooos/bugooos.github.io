@@ -212,12 +212,12 @@ const certificatesData = [
         icon: "certificate"
     },
     // ADD NEW CERTIFICATES HERE
-    //{
-    //    title: "New Certificate",
-    //    issuer: "Issuing Organization",
-    //    link: "https://example.com",
-    //    icon: "certificate"
-    //}
+    {
+        title: "Introduction to Penetration Testing",
+        issuer: "Security Blue Team",
+        link: "https://drive.google.com/drive/u/3/folders/1vwTyvC8fh4hK9LXsvd-GhcgNFdt6kgyG",
+        icon: "certificate"
+    }
 ];
 
     // Badge data
