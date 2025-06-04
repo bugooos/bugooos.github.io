@@ -1,517 +1,17 @@
-:root {
-    --neon-blue: #0ff0fc;
-    --neon-purple: #bc13fe;
-    --hacker-green: #00ff41;
-    --cyber-black: #0a0a12;
-    --stardust: rgba(255, 255, 255, 0.8);
-    --terminal-text: #c8c8c8;
-}
-
-@font-face {
-    font-family: 'Fira Code';
-    src: url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&display=swap');
-}
-
-body {
-    background-color: var(--cyber-black);
-    color: var(--terminal-text);
-    font-family: 'Fira Code', monospace;
-    line-height: 1.6;
-    margin: 0;
-    padding: 0;
-    background-image: 
-        /*radial-gradient(circle at 10% 20%, rgba(11, 2, 35, 0.8) 0%, transparent 20%), */
-        /*radial-gradient(circle at 90% 80%, rgba(66, 13, 110, 0.6) 0%, transparent 20%), */
-        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><circle cx="50" cy="50" r="1" fill="white" opacity="0.5"/></svg>');
-    background-size: cover;
-    overflow-x: hidden;
-}
-
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 2rem;
-}
-
-/* Navigation Bar */
-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1.5rem 2rem; /* Added horizontal padding */
-    border-bottom: 1px solid rgba(188, 19, 254, 0.3);
-    position: sticky;
-    top: 0;
-    background-color: rgba(10, 10, 18, 0.9);
-    z-index: 100;
-    backdrop-filter: blur(5px);
-}
-
-.logo {
-    font-size: 1.8rem;
-    font-weight: bold;
-    background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple));
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    text-decoration: none;
-    margin-right: auto; /* Pushes logo to the left with space */
-    padding-left: 1rem; /* Added space from left border */
-}
-
-.nav-links {
-    display: flex;
-    gap: 2rem;
-    padding-right: 1rem; /* Added space from right border */
-}
-
-.nav-links a {
-    color: var(--terminal-text);
-    text-decoration: none;
-    position: relative;
-    transition: all 0.3s ease;
-    padding: 0.5rem 0; /* Added vertical padding for better click area */
-}
-
-.nav-links a:hover {
-    color: var(--neon-blue);
-}
-
-.nav-links a::after {
-    content: '';
-    position: absolute;
-    bottom: -5px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: var(--neon-purple);
-    transition: width 0.3s ease;
-}
-
-.nav-links a:hover::after {
-    width: 100%;
-}
-
-/* Hero Section */
-.hero {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 5rem 0;
-    min-height: 60vh;
-}
-
-.hero h1 {
-    font-size: 3.5rem;
-    margin: 0;
-    background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple));
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    margin-bottom: 1rem;
-}
-
-.hero h2 {
-    font-size: 1.5rem;
-    color: var(--hacker-green);
-    margin-bottom: 2rem;
-}
-
-.social-links {
-    display: flex;
-    gap: 1.5rem;
-    margin-top: 2rem;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
-.social-card {
-    background: rgba(15, 240, 252, 0.1);
-    border: 1px solid rgba(15, 240, 252, 0.3);
-    border-radius: 8px;
-    padding: 1rem 1.5rem;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    text-decoration: none;
-    color: var(--terminal-text);
-}
-
-.social-card:hover {
-    background: rgba(188, 19, 254, 0.2);
-    border-color: var(--neon-purple);
-    transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(188, 19, 254, 0.2);
-}
-
-.social-card i {
-    font-size: 1.2rem;
-}
-
-/* About Section */
-.about {
-    padding: 4rem 0;
-    border-top: 1px solid rgba(188, 19, 254, 0.3);
-    border-bottom: 1px solid rgba(188, 19, 254, 0.3);
-}
-
-.about-content {
-    display: flex;
-    align-items: center;
-    gap: 3rem;
-}
-
-.about-text {
-    flex: 1;
-}
-
-.about h2 {
-    font-size: 2rem;
-    color: var(--neon-blue);
-    margin-bottom: 1.5rem;
-}
-
-.about p {
-    margin-bottom: 1.5rem;
-    line-height: 1.8;
-}
-
-.cta-button {
-    display: inline-block;
-    background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple));
-    color: var(--cyber-black);
-    padding: 0.8rem 1.5rem;
-    border-radius: 5px;
-    text-decoration: none;
-    font-weight: bold;
-    margin-top: 1rem;
-    transition: all 0.3s ease;
-}
-
-.cta-button:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(188, 19, 254, 0.4);
-}
-
-/* Projects Section */
-.projects {
-    padding: 4rem 0;
-}
-
-.section-title {
-    font-size: 2rem;
-    color: var(--neon-blue);
-    margin-bottom: 2rem;
-    text-align: center;
-}
-
-.project-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-    gap: 2rem;
-}
-
-.project-card {
-    background: rgba(10, 10, 18, 0.8);
-    border: 1px solid rgba(188, 19, 254, 0.2);
-    border-radius: 8px;
-    padding: 1.5rem;
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
-}
-
-.project-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(188, 19, 254, 0.2);
-    border-color: var(--neon-purple);
-}
-
-.project-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 4px;
-    background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple));
-}
-
-.project-card h3 {
-    color: var(--hacker-green);
-    margin-top: 0;
-}
-
-.project-card p {
-    margin-bottom: 1.5rem;
-}
-
-.project-link {
-    color: var(--neon-blue);
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    transition: all 0.3s ease;
-}
-
-.project-link:hover {
-    color: var(--neon-purple);
-    text-shadow: 0 0 8px rgba(188, 19, 254, 0.5);
-}
-
-/* Skills Section */
-.skills {
-    padding: 4rem 0;
-    border-top: 1px solid rgba(188, 19, 254, 0.3);
-    border-bottom: 1px solid rgba(188, 19, 254, 0.3);
-}
-
-.skills-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 2rem;
-}
-
-.skill-category {
-    background: rgba(10, 10, 18, 0.8);
-    border: 1px solid rgba(188, 19, 254, 0.2);
-    border-radius: 8px;
-    padding: 1.5rem;
-}
-
-.skill-category h3 {
-    color: var(--neon-purple);
-    margin-top: 0;
-    border-bottom: 1px solid rgba(188, 19, 254, 0.3);
-    padding-bottom: 0.5rem;
-}
-
-.skill-list {
-    list-style-type: none;
-    padding: 0;
-}
-
-.skill-list li {
-    padding: 0.5rem 0;
-    position: relative;
-    padding-left: 1.5rem;
-}
-
-.skill-list li::before {
-    content: '▹';
-    position: absolute;
-    left: 0;
-    color: var(--hacker-green);
-}
-
-/* Contact Section */
-.contact {
-    padding: 2.5rem 0; /* Reduced from 4rem */
-}
-
-.contact-form {
-    max-width: 100%;
-    width: 100%;
-    margin: 0 auto;
-    background: rgba(10, 10, 18, 0.8);
-    border: 1px solid rgba(188, 19, 254, 0.2);
-    border-radius: 8px;
-    padding: 1rem; /* Reduced from 2rem */
-    box-sizing: border-box;
-}
-
-.contact-form form {
-    margin: 0;
-}
-
-.contact .container {
-    max-width: 600px; /* Match form width */
-    margin: 0 auto; /* Center it */
-}
-
-.form-group {
-    margin-bottom: 0.8rem; /* Reduced from 1.5rem */
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: 0.3rem; /* Reduced from 0.5rem */
-    color: var(--neon-blue);
-    font-size: 0.8rem; /* Slightly smaller label */
-}
-
-.form-group input,
-.form-group textarea {
-    width: 100%;
-    padding: 0.5rem; /* Reduced from 0.8rem */
-    background: rgba(15, 240, 252, 0.1);
-    border: 1px solid rgba(15, 240, 252, 0.3);
-    border-radius: 5px;
-    color: var(--terminal-text);
-    font-family: 'Fira Code', monospace;
-    font-size: 0.9rem; /* Slightly smaller text */
-    box-sizing: border-box;
-}
-
-.form-group textarea {
-    min-height: 80px; /* Reduced from 150px */
-    resize: vertical;
-}
-
-.submit-btn {
-    background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple));
-    color: var(--cyber-black);
-    border: none;
-    padding: 0.5rem 1rem; /* Reduced from 0.8rem 1.5rem */
-    border-radius: 5px;
-    cursor: pointer;
-    font-family: 'Fira Code', monospace;
-    font-size: 0.9rem; /* Slightly smaller text */
-    font-weight: bold;
-    transition: all 0.3s ease;
-}
-
-/* Footer - Made more compact */
-footer {
-    text-align: center;
-    padding: 1.5rem 0; /* Reduced from 2rem */
-    border-top: 1px solid rgba(188, 19, 254, 0.3);
-    margin-top: 1.5rem; /* Reduced from 2rem */
-}
-
-.footer-text {
-    margin-bottom: 0.8rem; /* Reduced from 1rem */
-    font-size: 0.9rem;
-}
-
-.footer-links {
-    display: flex;
-    justify-content: center;
-    gap: 1rem; /* Reduced from 1.5rem */
-    margin-bottom: 0.8rem; /* Reduced from 1rem */
-}
-
-.copyright {
-    font-size: 0.8rem; /* Slightly smaller */
-}
-
-/* Animations */
-@keyframes float {
-    0% { transform: translateY(0px); }
-    50% { transform: translateY(-10px); }
-    100% { transform: translateY(0px); }
-}
-
-.floating {
-    animation: float 3s ease-in-out infinite;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-    .hero h1 {
-        font-size: 2.5rem;
-    }
-    
-    .about-content {
-        flex-direction: column;
-    }
-    
-    .project-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .nav-links {
-        gap: 1rem;
-    }
-}
-
-@media (max-width: 480px) {
-    nav {
-        flex-direction: column;
-        gap: 1rem;
-    }
-    
-    .nav-links {
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-}
-
-.alternative-contact {
-    text-align: center;
-    margin-top: 2rem;
-    color: var(--neon-blue);
-}
-
-.alternative-contact a {
-    color: var(--hacker-green);
-    text-decoration: none;
-    transition: all 0.3s ease;
-}
-
-.alternative-contact a:hover {
-    text-decoration: underline;
-    text-shadow: 0 0 8px rgba(0, 255, 65, 0.5);
-}
-
-/* Typing Animation */
-.typing-animation {
-    overflow: hidden; /* Ensures text doesn't show before animation */
-    border-right: 2px solid var(--neon-blue); /* Cursor effect */
-    white-space: nowrap; /* Keeps text on one line */
-    margin: 0 auto; /* Centers the element */
-    letter-spacing: 2px; /* Adjust as needed */
-    animation: 
-        typing 3.5s steps(40, end),
-        blink-caret 0.75s step-end infinite;
-}
-
-/* Typing effect */
-@keyframes typing {
-    from { width: 0 }
-    to { width: 100% }
-}
-
-/* Cursor blink effect */
-@keyframes blink-caret {
-    from, to { border-color: transparent }
-    50% { border-color: var(--neon-blue); }
-}
-
-/* Glich curser */
-@keyframes glitch {
-    0% { transform: translate(0); }
-    20% { transform: translate(-3px, 3px); }
-    40% { transform: translate(-3px, -3px); }
-    60% { transform: translate(3px, 3px); }
-    80% { transform: translate(3px, -3px); }
-    100% { transform: translate(0); }
-}
-.glitch-effect {
-    animation: glitch 0.5s linear infinite;
-    text-shadow: 2px 0 var(--neon-blue), -2px 0 var(--neon-purple);
-}
-
-/* terminal look */
-h1 {
-    border-right: none; /* Removes cursor-like border (if any) */
-    font-family: 'Fira Code', monospace; /* Ensures code font */
-}
-
-/* Combined Credentials(certification) Section */
+/* Combined Credentials Section */
 .combined-credentials {
     padding: 4rem 0;
+    background-color: var(--cyber-black);
     border-top: 1px solid rgba(188, 19, 254, 0.3);
     border-bottom: 1px solid rgba(188, 19, 254, 0.3);
 }
 
 .credentials-wrapper {
     display: flex;
+    justify-content: space-between;
     gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .certifications-section, .badges-section {
@@ -520,6 +20,8 @@ h1 {
     border: 1px solid rgba(188, 19, 254, 0.2);
     border-radius: 8px;
     padding: 1.5rem;
+    position: relative;
+    overflow: hidden;
 }
 
 .certifications-section h3, .badges-section h3 {
@@ -530,84 +32,155 @@ h1 {
     margin-bottom: 1.5rem;
 }
 
-.certification-item, .badge-item {
-    margin-bottom: 1.5rem;
-    padding-bottom: 1.5rem;
-    border-bottom: 1px dashed rgba(188, 19, 254, 0.1);
+/* Slider Containers */
+.certifications-slider, .badges-slider {
+    position: relative;
+    height: 300px;
+    overflow: hidden;
 }
 
-.certification-item:last-child, .badge-item:last-child {
-    border-bottom: none;
-    margin-bottom: 0;
-    padding-bottom: 0;
+/* Credential Items */
+.certification-item, .badge-item {
+    position: absolute;
+    width: 100%;
+    background: rgba(15, 15, 25, 0.9);
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transition: all 0.5s ease;
+    border: 1px solid rgba(15, 240, 252, 0.1);
 }
 
 .certification-item h4, .badge-item h4 {
     color: var(--hacker-green);
-    margin: 0 0 0.5rem 0;
+    margin-top: 0;
 }
 
-.certificates-slider, .badges-slider {
-  display: flex;
-  gap: 20px;
-  position: relative;
-  height: 300px; /* Adjust based on your content */
+.certification-item p, .badge-item p {
+    color: var(--terminal-text);
+    margin-bottom: 1rem;
 }
 
-.certificate, .badge {
-  width: 30%;
-  transition: all 0.5s ease;
-  opacity: 0;
-  position: absolute;
+/* Active item (center) */
+.certification-item.active, .badge-item.active {
+    opacity: 1;
+    transform: translateX(0);
+    z-index: 3;
+    left: 0;
 }
 
-.certificate.active, .badge.active {
-  opacity: 1;
-  transform: translateX(0);
-  left: 0;
+/* Next item (right side) */
+.certification-item.next, .badge-item.next {
+    opacity: 0.7;
+    transform: translateX(30%);
+    z-index: 2;
+    left: 50%;
 }
 
-.certificate.next, .badge.next {
-  opacity: 0.7;
-  transform: translateX(100%);
-  left: 35%;
-}
-
-.certificate.prev, .badge.prev {
-  opacity: 0.7;
-  transform: translateX(-100%);
-  left: -35%;
+/* Previous item (left side) */
+.certification-item.prev, .badge-item.prev {
+    opacity: 0.7;
+    transform: translateX(-30%);
+    z-index: 2;
+    left: -50%;
 }
 
 /* Animation classes */
 .slide-out {
-  animation: slideOut 0.5s forwards;
+    animation: slideOut 0.5s forwards;
 }
 
 .slide-in {
-  animation: slideIn 0.5s forwards;
+    animation: slideIn 0.5s forwards;
 }
 
 @keyframes slideOut {
-  to {
-    opacity: 0;
-    transform: translateX(-100%);
-  }
+    to {
+        opacity: 0;
+        transform: translateX(-100%);
+    }
 }
 
 @keyframes slideIn {
-  from {
-    opacity: 0;
-    transform: translateX(100%);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
+    from {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
 
+/* Divider between sections */
 .divider {
     width: 1px;
-    background-color: rgba(188, 19, 254, 0.3);
+    background: linear-gradient(to bottom, 
+        transparent, 
+        rgba(188, 19, 254, 0.5), 
+        transparent);
     margin: 0 1rem;
+}
+
+/* CTA Button in credentials */
+.credentials-wrapper .cta-button {
+    background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple));
+    color: var(--cyber-black);
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: bold;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.credentials-wrapper .cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(188, 19, 254, 0.4);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .credentials-wrapper {
+        flex-direction: column;
+    }
+    
+    .divider {
+        width: 100%;
+        height: 1px;
+        margin: 2rem 0;
+        background: linear-gradient(to right, 
+            transparent, 
+            rgba(188, 19, 254, 0.5), 
+            transparent);
+    }
+    
+    .certifications-slider, .badges-slider {
+        height: 280px;
+    }
+    
+    .certification-item.next, .badge-item.next {
+        transform: translateX(25%);
+        left: 60%;
+    }
+    
+    .certification-item.prev, .badge-item.prev {
+        transform: translateX(-25%);
+        left: -60%;
+    }
+}
+
+/* Glitch effect for active credential */
+.certification-item.active h4, .badge-item.active h4 {
+    animation: glitch 1s linear infinite;
+}
+
+@keyframes glitch {
+    0% { text-shadow: none; }
+    25% { text-shadow: 2px 0 var(--neon-blue), -2px 0 var(--neon-purple); }
+    50% { text-shadow: -2px 0 var(--neon-blue), 2px 0 var(--neon-purple); }
+    75% { text-shadow: 2px 0 var(--neon-purple), -2px 0 var(--neon-blue); }
+    100% { text-shadow: none; }
 }

@@ -190,7 +190,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Certificate data
+
     // Certificate data
 const certificatesData = [
     {
@@ -248,6 +248,74 @@ const certificatesData = [
         //    icon: "shield-alt"
         //}
 ];
+
+        class CredentialsSlider {
+        constructor(containerSelector, itemSelector, items, isCertification = true) {
+            this.container = document.querySelector(containerSelector);
+            this.items = document.querySelectorAll(`${containerSelector} ${itemSelector}`);
+            this.allItems = items;
+            this.currentIndex = 0;
+            this.interval = null;
+            this.animationDuration = 500;
+            this.isCertification = isCertification;
+            
+            this.updateDisplay();
+            this.startRotation(3000);
+        }
+        
+        updateDisplay() {
+            const prevIndex = (this.currentIndex - 1 + this.allItems.length) % this.allItems.length;
+            const nextIndex = (this.currentIndex + 1) % this.allItems.length;
+            
+            this.updateItem(this.items[0], this.allItems[this.currentIndex], 'active');
+            this.updateItem(this.items[1], this.allItems[nextIndex], 'next');
+            this.updateItem(this.items[2], this.allItems[prevIndex], 'prev');
+        }
+        
+        updateItem(element, data, className) {
+            element.className = `${this.isCertification ? 'certification-item' : 'badge-item'} ${className}`;
+            element.innerHTML = `
+                <h4>${data.title}</h4>
+                <p>Issued by: ${data.issuer}</p>
+                <a href="${data.link}" class="cta-button" target="_blank">
+                    <i class="fas fa-${data.icon}"></i> 
+                    View ${this.isCertification ? 'Certificate' : 'Badge'}
+                </a>
+            `;
+        }
+        
+        rotate() {
+            this.items[0].classList.add('slide-out');
+            
+            setTimeout(() => {
+                this.currentIndex = (this.currentIndex + 1) % this.allItems.length;
+                this.updateDisplay();
+                
+                this.items[0].classList.add('slide-in');
+                
+                setTimeout(() => {
+                    this.items[0].classList.remove('slide-in');
+                }, this.animationDuration);
+            }, this.animationDuration);
+        }
+        
+        startRotation(interval) {
+            this.interval = setInterval(() => this.rotate(), interval);
+        }
+    }
+
+    // Initialize sliders when DOM is loaded
+    document.addEventListener('DOMContentLoaded', function() {
+        if (certificatesData.length > 0 && document.querySelector('.certifications-slider')) {
+            new CredentialsSlider('.certifications-slider', '.certification-item', certificatesData, true);
+        }
+        
+        if (badgesData.length > 0 && document.querySelector('.badges-slider')) {
+            new CredentialsSlider('.badges-slider', '.badge-item', badgesData, false);
+        }
+    });
+
+
 
     // Initialize displays
     if (document.querySelector('.certifications-slider')) {
