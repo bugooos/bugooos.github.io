@@ -125,86 +125,136 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     class RotatingDisplay {
-  constructor(containerSelector, itemSelector, items) {
-    this.container = document.querySelector(containerSelector);
-    this.items = document.querySelectorAll(itemSelector);
-    this.allItems = items; // Array of all your certificates/badges data
-    this.currentIndex = 0;
-    this.interval = null;
-    this.animationDuration = 500; // ms
-    
-    // Initialize display
-    this.updateDisplay();
-    
-    // Start rotation
-    this.startRotation(3000); // Rotate every 3 seconds
-  }
-  
-  updateDisplay() {
-    // Clear all classes first
-    this.items.forEach(item => {
-      item.className = itemSelector.replace('.', ''); // Reset to base class
-    });
-    
-    // Calculate indices for current, next, and previous items
-    const prevIndex = (this.currentIndex - 1 + this.allItems.length) % this.allItems.length;
-    const nextIndex = (this.currentIndex + 1) % this.allItems.length;
-    
-    // Update DOM elements with data
-    this.updateItem(this.items[0], this.allItems[this.currentIndex], 'active');
-    this.updateItem(this.items[1], this.allItems[nextIndex], 'next');
-    this.updateItem(this.items[2], this.allItems[prevIndex], 'prev');
-  }
-  
-  updateItem(element, data, className) {
-    element.classList.add(className);
-    // Update element content with your data
-    element.innerHTML = `
-      <img src="${data.image}" alt="${data.title}">
-      <h3>${data.title}</h3>
-      <p>${data.description}</p>
-    `;
-  }
-  
-  rotate() {
-    // Animate current item out
-    this.items[0].classList.add('slide-out');
-    
-    setTimeout(() => {
-      this.currentIndex = (this.currentIndex + 1) % this.allItems.length;
-      this.updateDisplay();
-      
-      // Animate new item in
-      this.items[0].classList.add('slide-in');
-      
-      setTimeout(() => {
-        this.items[0].classList.remove('slide-in');
-      }, this.animationDuration);
-    }, this.animationDuration);
-  }
-  
-  startRotation(interval) {
-    this.interval = setInterval(() => this.rotate(), interval);
-  }
-  
-  stopRotation() {
-    clearInterval(this.interval);
-  }
-}
+        constructor(containerSelector, itemSelector, items) {
+            this.container = document.querySelector(containerSelector);
+            this.items = document.querySelectorAll(itemSelector);
+            this.allItems = items;
+            this.currentIndex = 0;
+            this.interval = null;
+            this.animationDuration = 500;
+            
+            this.updateDisplay();
+            this.startRotation(3000);
+        }
+        
+        updateDisplay() {
+            // Clear all classes first
+            this.items.forEach(item => {
+                item.className = item.className.split(' ')[0]; // Reset to base class
+            });
+            
+            const prevIndex = (this.currentIndex - 1 + this.allItems.length) % this.allItems.length;
+            const nextIndex = (this.currentIndex + 1) % this.allItems.length;
+            
+            this.updateItem(this.items[0], this.allItems[this.currentIndex], 'active');
+            this.updateItem(this.items[1], this.allItems[nextIndex], 'next');
+            this.updateItem(this.items[2], this.allItems[prevIndex], 'prev');
+        }
+        
+        updateItem(element, data, className) {
+            element.classList.add(className);
+            element.innerHTML = `
+                <h4>${data.title}</h4>
+                <p>${data.issuer ? `Issued by: ${data.issuer}` : data.description}</p>
+                <a href="${data.link}" class="cta-button" target="_blank">
+                    <i class="fas fa-${data.icon || (className.includes('badge') ? 'shield-alt' : 'certificate')}"></i> 
+                    View ${className.includes('badge') ? 'Badge' : 'Certificate'}
+                </a>
+                ${data.image ? `<img src="${data.image}" alt="${data.title}" class="credential-image">` : ''}
+            `;
+        }
+        
+        rotate() {
+            // Animate current item out
+            this.items[0].classList.add('slide-out');
+            
+            setTimeout(() => {
+                this.currentIndex = (this.currentIndex + 1) % this.allItems.length;
+                this.updateDisplay();
+                
+                // Animate new item in
+                this.items[0].classList.add('slide-in');
+                
+                setTimeout(() => {
+                    this.items[0].classList.remove('slide-in');
+                }, this.animationDuration);
+            }, this.animationDuration);
+        }
+        
+        startRotation(interval) {
+            this.interval = setInterval(() => this.rotate(), interval);
+        }
+        
+        stopRotation() {
+            clearInterval(this.interval);
+        }
+    }
 
-// Your data arrays
+    // Certificate data
+    // Certificate data
 const certificatesData = [
-  { image: 'cert1.jpg', title: 'Certificate 1', description: 'Description 1' },
-  // Add all your certificates
+    {
+        title: "Cyber Job Simulation",
+        issuer: "Deloitte Australia",
+        link: "https://forage-uploads-prod.s3.amazonaws.com/completion-certificates/9PBTqmSxAf6zZTseP/E9pA6qsdbeyEkp3ti_9PBTqmSxAf6zZTseP_N7yWfvEKmA62rZgWu_1747731290478_completion_certificate.pdf",
+        icon: "certificate"
+    },
+    {
+        title: "Linux 100",
+        issuer: "TCM Security",
+        link: "https://drive.google.com/drive/u/2/folders/1OrJQwDZGIPmVMVlPKc-FTN2i-vmPr_00",
+        icon: "certificate"
+    },
+    {
+        title: "Soft Skill",
+        issuer: "TCM Security",
+        link: "https://drive.google.com/drive/u/2/folders/1dkyN7f-bt5CknC4J_zziB0xz12RI15yO",
+        icon: "certificate"
+    },
+    // ADD NEW CERTIFICATES HERE
+    //{
+    //    title: "New Certificate",
+    //    issuer: "Issuing Organization",
+    //    link: "https://example.com",
+    //    icon: "certificate"
+    //}
 ];
 
-const badgesData = [
-  { image: 'badge1.png', title: 'Badge 1', description: 'Description 1' },
-  // Add all your badges
+    // Badge data
+    const badgesData = [
+        {
+            title: "JWT Attacks and Detection",
+            issuer: "letsdefend",
+            link: "https://app.letsdefend.io/my-rewards/detail/1e83596a92254c8faf70512adac3deb9",
+            icon: "shield-alt"
+        },
+        {
+            title: "SOC Member",
+            issuer: "letsdefend",
+            link: "https://app.letsdefend.io/my-rewards/detail/40c748ce7b5a4e0e8ed99a0671222b57",
+            icon: "shield-alt"
+        },
+        {
+            title: "ISC2 Candidate",
+            issuer: "ISC2",
+            link: "https://www.credly.com/badges/8753d346-6154-4f1c-99e6-acd8034d6e61/linked_in_profile",
+            icon: "shield-alt"
+        },
+        // ADD NEW BADGES HERE
+        //{
+        //    title: "New Badge",
+        //    issuer: "Issuing Organization",
+        //    link: "https://example.com",
+        //    icon: "shield-alt"
+        //}
 ];
 
-// Initialize displays
-const certificatesDisplay = new RotatingDisplay('.certificates-slider', '.certificate', certificatesData);
-const badgesDisplay = new RotatingDisplay('.badges-slider', '.badge', badgesData);
-
+    // Initialize displays
+    if (document.querySelector('.certifications-slider')) {
+        const certificatesDisplay = new RotatingDisplay('.certifications-slider', '.certification-item', certificatesData);
+    }
+    
+    if (document.querySelector('.badges-slider')) {
+        const badgesDisplay = new RotatingDisplay('.badges-slider', '.badge-item', badgesData);
+    }
 });
