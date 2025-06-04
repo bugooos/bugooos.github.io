@@ -241,12 +241,18 @@ const certificatesData = [
             icon: "shield-alt"
         },
         // ADD NEW BADGES HERE
-        //{
-        //    title: "New Badge",
-        //    issuer: "Issuing Organization",
-        //    link: "https://example.com",
-        //    icon: "shield-alt"
-        //}
+        {
+            title: "Incident Handler",
+            issuer: "letsdefend",
+            link: "https://app.letsdefend.io/my-rewards/detail/b2b7c179158044a491c7553a04be2469",
+            icon: "shield-alt"
+        }
+        {
+            title: "First Blood",
+            issuer: "letsdefend",
+            link: "https://app.letsdefend.io/my-rewards/detail/27aeef0873284ae09e54dba13ddad01a",
+            icon: "shield-alt"
+        }
 ];
 
         class CredentialsSlider {
