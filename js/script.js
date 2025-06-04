@@ -260,7 +260,7 @@ const certificatesData = [
             this.isCertification = isCertification;
             
             this.updateDisplay();
-            this.startRotation(3000);
+            this.startRotation(5000);
         }
         
         updateDisplay() {
