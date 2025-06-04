@@ -246,7 +246,7 @@ const certificatesData = [
             issuer: "letsdefend",
             link: "https://app.letsdefend.io/my-rewards/detail/b2b7c179158044a491c7553a04be2469",
             icon: "shield-alt"
-        }
+        },
         {
             title: "First Blood",
             issuer: "letsdefend",
