@@ -375,22 +375,8 @@ const certificatesData = [
     // Hall of Fame data - Add/modify entries here
     const hofEntries = [
     {
-        company: "Google",
-        logo: "https://via.placeholder.com/150x60?text=Google",
-        cert: "https://via.placeholder.com/300x200?text=Top+Developer+2023",
-        description: "Google Developer Expert Award for Open Source Contributions"
-    },
-    {
-        company: "Microsoft",
-        logo: "https://via.placeholder.com/150x60?text=Microsoft",
-        cert: "https://via.placeholder.com/300x200?text=Azure+Expert",
-        description: "Microsoft MVP for Cloud Infrastructure Solutions"
-    },
-    {
-        company: "AWS",
-        logo: "https://via.placeholder.com/150x60?text=AWS",
-        cert: "https://via.placeholder.com/300x200?text=Solutions+Architect",
-        description: "AWS Certified Solutions Architect - Professional"
+        company: "ETSY",
+        logo: "<a href='https://iconscout.com/icons/etsy' class='text-underline font-size-sm' target='_blank'>Etsy</a> by <a href='https://iconscout.com/contributors/icon-mafia' class='text-underline font-size-sm' target='_blank'>Icon Mafia</a>"
     }
     ];
 
