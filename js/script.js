@@ -217,6 +217,12 @@ const certificatesData = [
         issuer: "Security Blue Team",
         link: "https://drive.google.com/drive/u/3/folders/1vwTyvC8fh4hK9LXsvd-GhcgNFdt6kgyG",
         icon: "certificate"
+    },
+    {
+        title: "Introduction to Powershell",
+        issuer: "Security Blue Team",
+        link: "https://drive.google.com/drive/u/3/folders/1QxdIw8BUJlHpvpHZjIC0ffI3FcFyJbPE",
+        icon: "certificate"
     }
 ];
 
@@ -252,7 +258,38 @@ const certificatesData = [
             issuer: "letsdefend",
             link: "https://app.letsdefend.io/my-rewards/detail/27aeef0873284ae09e54dba13ddad01a",
             icon: "shield-alt"
+        },
+        {
+            title: "How to Investigate a SIEM Alert?",
+            issuer: "letsdefend",
+            link: "https://app.letsdefend.io/my-rewards/detail/a2a9e084922e424cb86ac8f23b6931c3",
+            icon: "shield-alt"
+        },
+        {
+            title: "Incident Handler - 2",
+            issuer: "letsdefend",
+            link: "https://app.letsdefend.io/my-rewards/detail/1d641c14f0d94914a9e919f4f6f45244",
+            icon: "shield-alt"
+        },
+        {
+            title: "Incident Management",
+            issuer: "letsdefend",
+            link: "https://app.letsdefend.io/my-rewards/detail/5d39105120ac45fd9fa4a4ad87366e6a",
+            icon: "shield-alt"
+        },
+        {
+            title: "SIEM 101",
+            issuer: "letsdefend",
+            link: "https://app.letsdefend.io/my-rewards/detail/24589d682d4c4bef92e867340e7a85cf",
+            icon: "shield-alt"
+        },
+        {
+            title: "VirusTotal",
+            issuer: "letsdefend",
+            link: "https://app.letsdefend.io/my-rewards/detail/b3965bd8f72e44958f427cedb726c718",
+            icon: "shield-alt"
         }
+
 ];
 
         class CredentialsSlider {
@@ -279,13 +316,16 @@ const certificatesData = [
         }
         
         updateItem(element, data, className) {
-            element.className = `${this.isCertification ? 'certification-item' : 'badge-item'} ${className}`;
+            // Determine if this is a certification based on the className passed
+            const isCert = className.includes('certification') || this.isCertification;
+            
+            element.className = `${isCert ? 'certification-item' : 'badge-item'} ${className}`;
             element.innerHTML = `
                 <h4>${data.title}</h4>
                 <p>Issued by: ${data.issuer}</p>
                 <a href="${data.link}" class="cta-button" target="_blank">
                     <i class="fas fa-${data.icon}"></i> 
-                    View ${this.isCertification ? 'Certificate' : 'Badge'}
+                    View ${isCert ? 'Certificate' : 'Badge'}
                 </a>
             `;
         }
