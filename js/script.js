@@ -371,4 +371,64 @@ const certificatesData = [
     if (document.querySelector('.badges-slider')) {
         const badgesDisplay = new RotatingDisplay('.badges-slider', '.badge-item', badgesData);
     }
+
+    // Hall of Fame data - Add/modify entries here
+    const hofEntries = [
+    {
+        company: "Google",
+        logo: "https://via.placeholder.com/150x60?text=Google",
+        cert: "https://via.placeholder.com/300x200?text=Top+Developer+2023",
+        description: "Google Developer Expert Award for Open Source Contributions"
+    },
+    {
+        company: "Microsoft",
+        logo: "https://via.placeholder.com/150x60?text=Microsoft",
+        cert: "https://via.placeholder.com/300x200?text=Azure+Expert",
+        description: "Microsoft MVP for Cloud Infrastructure Solutions"
+    },
+    {
+        company: "AWS",
+        logo: "https://via.placeholder.com/150x60?text=AWS",
+        cert: "https://via.placeholder.com/300x200?text=Solutions+Architect",
+        description: "AWS Certified Solutions Architect - Professional"
+    }
+    ];
+
+    // Function to create HOF entries
+    function createHofEntry(entry) {
+    const hofItem = document.createElement('div');
+    hofItem.className = 'hof-item';
+    
+    hofItem.innerHTML = `
+        <div class="hof-header">
+        <img src="${entry.logo}" alt="${entry.company}" class="hof-logo">
+        <h3 class="hof-company">${entry.company}</h3>
+        </div>
+        <div class="hof-content">
+        <img src="${entry.cert}" alt="Certification" class="hof-cert">
+        <p class="hof-description">${entry.description}</p>
+        </div>
+    `;
+    
+    return hofItem;
+    }
+
+    // Initialize Hall of Fame
+    document.addEventListener('DOMContentLoaded', () => {
+    const container = document.querySelector('.hof-container');
+    const indicators = document.querySelector('.hof-indicators');
+    
+    // Add entries to DOM
+    hofEntries.forEach((entry, index) => {
+        container.appendChild(createHofEntry(entry));
+        
+        // Create indicators
+        const indicator = document.createElement('span');
+        indicator.className = `hof-indicator ${index === 0 ? 'active' : ''}`;
+        indicator.dataset.index = index;
+        indicators.appendChild(indicator);
+    });
+    
+    // Add navigation logic here (optional)
+    });
 });

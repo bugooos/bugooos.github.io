@@ -552,3 +552,35 @@ h1 {
     background-color: rgba(188, 19, 254, 0.3);
     margin: 0 1rem;
 }
+
+/* Hall of fame */
+
+.hall-of-fame {
+    max-width: 90%;
+    margin: 0 auto;
+}
+
+.hof-container {
+    display: flex;
+    overflow-x: auto;
+    gap: 20px;
+    padding: 20px 0;
+    scroll-snap-type: x mandatory;
+}
+
+.hof-item {
+    min-width: 300px;
+    scroll-snap-align: start;
+    background: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.hof-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin-top: 20px;
+}
